@@ -1,0 +1,7 @@
+
+{% load thumbnail %}
+
+<a class="img-{{ forloop.counter }}" href="{% thumbnail instance.image 'plugins:gallery:full' %}" title="{% if instance.photo_credit %}<small>{{ instance.photo_credit }}</small>{% endif %}">
+    <img src="{% thumbnail instance.image 'plugins:gallery:thumbnail' %}" alt="{{ instance.image.default_alt_text|default:'' }}" />
+</a>
+

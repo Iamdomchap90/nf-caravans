@@ -1,0 +1,11 @@
+{% load static thumbnail %}
+
+<div class="event-cards__card">
+    <img class="event-cards__card-image" src="{% thumbnail event.image 'event:card' %}" alt="" />
+    <div class="event-cards__card-text">
+        <h4><a href="{{ event.slug }}">{{ event.title }}</a></h4>
+        <p>{{ event.description }}</p>
+        <p>{{ event.time_display }}</p>
+        <a href="{{ event.get_absolute_url }}">Read more</a>
+    </div>
+</div>

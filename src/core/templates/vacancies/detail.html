@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load cms_tags %}
+
+{% block title %}{{ vacancy.position }}{% endblock %}
+{% block meta_description %}{{ vacancy.description }}{% endblock %}
+
+{% block og_title %}{{ vacancy.position }}{% endblock %}
+{% block og_desc %}{{ vacancy.description }}{% endblock %}
+{% block twitter_title %}{{ vacancy.position }}{% endblock %}
+{% block twitter_description %}{{ vacancy.description }}{% endblock %}
+
+{% block body %}
+
+<h1>{{ vacancy.position }}</h1>
+{% render_placeholder vacancy.content %}
+
+{% endblock body %}
+

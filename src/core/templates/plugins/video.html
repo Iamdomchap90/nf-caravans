@@ -1,0 +1,28 @@
+
+{% load thumbnail static sekizai_tags %}
+
+{% addtoblock extra_schema_data %}
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "VideoObject",
+            "contentUrl": "{{ instance.youtube_url }}"
+        }
+    </script>
+{% endaddtoblock %}
+
+<section class="video-block">
+    <div class="wrapper wrapper--very-thin">
+        <div class="video-block__container">
+            <a href="{{ instance.youtube_url }}" title="Click here to play the video" class="video-block__image video-modal" style="background-image: url('{% thumbnail instance.image 'plugins:content_width_video' %}')"></a>
+
+            <div class="video-block__content">
+                <a href="{{ instance.youtube_url }}" class="video-modal" title="Click here to play the video">
+                    <img class="video-block__play" src="{% static 'img/video-play.svg' %}" alt="{{ instance.alt_text }}" aria-hidden="true" />
+                </a>
+                <p class="video-block__caption">{{ instance.title }}</p>
+            </div>
+        </div>
+    </div>
+</section>
+

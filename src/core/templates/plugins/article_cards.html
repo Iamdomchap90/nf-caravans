@@ -1,0 +1,13 @@
+{% load cms_tags %}
+
+<section class="">
+    <div class="wrapper">
+        <h2>{{ instance.title }}</h2>
+        <div class="people-block__people">
+            {% for article in articles %}
+                {% include "news/components/article_card.html" %}
+            {% endfor %}
+        </div>
+    </div>
+</section>
+

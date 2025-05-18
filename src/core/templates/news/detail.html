@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load cms_tags static thumbnail thumbnail_position menu_tags %}
+
+{% block schema_data %}
+    <script type="application/ld+json">
+        {
+            "@context": "http://schema.org",
+            "@type": "NewsArticle",
+            "headline": "{% firstof article.meta_title article.title %}",
+            "image": [
+                "https://{{ request.site.domain }}{{ article.photo.url }}"
+            ],
+            "datePublished": "{{ article.publish_at|isoformat }}",
+            "dateModified": "{{ article.updated_at|isoformat }}",{% if article.author %}
+            "author": [{
+                "@type": "Person",
+                "name": "{{ article.author.name }}"
+            }],{% endif %}
+            "publisher": {
+                "@type": "Organization",
+                "name": "{{ cookiecutter.client_name }}",
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": "{{ request.scheme }}://{{ request.META.HTTP_HOST }}{% static 'img/logo.png' %}"
+                }
+            },
+            "description": "{{ article.description }}"
+        }
+    </script>
+{% endblock schema_data %}
+
+{% block title %}{{ article.title }}{% endblock %}
+{% block meta_description %}{{ article.meta_description }}{% endblock %}
+
+{% block og_title %}{{ article.title }}{% endblock %}
+{% block og_desc %}{{ article.meta_description }}{% endblock %}
+{% block twitter_title %}{{ article.title }}{% endblock %}
+{% block twitter_description %}{{ article.meta_description }}{% endblock %}
+{% block og_image %}{% thumbnail article.photo 'social_share_image' %}{% endblock %}
+{% block og_image_secure %}{% thumbnail article.photo 'social_share_image' %}{% endblock %}
+{% block twitter_image %}{% thumbnail article.photo 'social_share_image' %}{% endblock %}
+
+{% block crumbs %}
+    {% with app_template=True %}
+        {% show_breadcrumb 0 "_components/breadcrumb.html" 0 %}
+        <li>{{ article.title|truncatewords:5 }}</li>
+    {% endwith %}
+{% endblock crumbs %}
+
+{% block body %}
+    {% render_placeholder article.content %}
+{% endblock body %}
+

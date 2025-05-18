@@ -1,0 +1,30 @@
+
+{% extends "base.html" %}
+
+{% block title %}Thank you{% endblock title %}
+
+{% block breadcrumb %}{% endblock %}
+
+{% block body %}
+    <section class="hero hero--details page-block">
+        <div class="wrapper">
+            {% if form.errors %}
+                <h1>Oops!</h1>
+            {% else %}
+                <h1>Thank you</h1>
+            {% endif %}
+        </div>
+    </section>
+    <section class="rich-text page-block">
+        <div class="wrapper wrapper--l">
+           {% if form.errors.email %}
+                <h2>{{ form.errors.email.0 }}</h2>
+                <p>Return to the <a href="/">homepage</a>.</p>
+            {% else %}
+                <h2>Thank you</h2>
+                <p>Thank you for signing up to the newsletter, {{ name }}. Return to the <a href="/">homepage.</a>.</p>
+            {% endif %}
+        </div>
+    </section>
+{% endblock body %}
+

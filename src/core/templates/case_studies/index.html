@@ -1,0 +1,16 @@
+
+{% extends 'index-base.html' %}
+{% load cms_tags %}
+
+{% block page_objects %}
+    <section class="news-cards">
+        <div class="wrapper">
+            {% for case_study in page_obj %}
+                {% include "case_studies/components/case_study_card.html" %}
+            {% empty %}
+                <h3>No case studies are currently listed for your search query.</h3>
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}
+

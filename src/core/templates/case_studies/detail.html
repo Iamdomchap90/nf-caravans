@@ -1,0 +1,27 @@
+
+{% extends "base.html" %}
+{% load cms_tags static thumbnail thumbnail_position menu_tags %}
+
+{% block title %}{{ case_study.title }}{% endblock %}
+{% block meta_description %}{{ case_study.meta_description }}{% endblock %}
+
+{% block og_title %}{{ case_study.title }}{% endblock %}
+{% block og_desc %}{{ case_study.meta_description }}{% endblock %}
+{% block twitter_title %}{{ case_study.title }}{% endblock %}
+{% block twitter_description %}{{ case_study.meta_description }}{% endblock %}
+{% block og_image %}{% thumbnail case_study.image 'social_share_image' %}{% endblock %}
+{% block og_image_secure %}{% thumbnail case_study.image 'social_share_image' %}{% endblock %}
+{% block twitter_image %}{% thumbnail case_study.image 'social_share_image' %}{% endblock %}
+
+{% block crumbs %}
+    {% with app_template=True %}
+        {% show_breadcrumb 0 "_components/breadcrumb.html" 0 %}
+        <li>{{ case_study.title|truncatewords:5 }}</li>
+    {% endwith %}
+{% endblock crumbs %}
+
+{% block body %}
+    {% render_placeholder case_study.content %}
+{% endblock body %}
+
+

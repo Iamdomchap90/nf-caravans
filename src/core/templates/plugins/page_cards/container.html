@@ -1,0 +1,11 @@
+
+{% load cms_tags %}
+
+<section class="wrapper">
+    <div class="page-cards">
+        {% for plugin in instance.child_plugin_instances %}
+            {% render_plugin plugin %}
+        {% endfor %}
+    </div>
+</section>
+

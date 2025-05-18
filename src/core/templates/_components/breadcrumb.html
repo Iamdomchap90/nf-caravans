@@ -1,0 +1,38 @@
+
+{% load static sekizai_tags %}
+
+{% addtoblock extra_schema_data %}
+    {% if not app_template %}
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@type": "BreadcrumbList",
+                "itemListElement": [{
+                    {% for item in ancestors %}
+                        "@type": "ListItem",
+                        "position": {{ forloop.counter }},
+                        "name": "{{ item.get_menu_title }}"{% if not forloop.last %},
+                        "item": "{{ request.scheme }}://{{ request.META.HTTP_HOST }}{{ item.get_absolute_url }}"
+                            },{
+                        {% else %}
+                            }
+                        {% endif %}
+                    {% endfor %}
+                ]
+            }
+        </script>
+    {% endif %}
+{% endaddtoblock %}
+
+{% for item in ancestors %}
+    {% if not forloop.last or app_template %}
+        {% if not item.get_menu_title == "resources" %}
+            <li><a href="{{ item.get_absolute_url }}" title="{{ item.get_menu_title }}">{{ item.get_menu_title }}</a></li>
+            <li><img src="{% static 'img/breadcrumb-arrow.svg' %}" alt="" aria-hidden="true" /></li>
+        {% endif %}
+    {% else %}
+        <li>{{ item.get_menu_title }}</li>
+    {% endif %}
+{% endfor %}
+
+

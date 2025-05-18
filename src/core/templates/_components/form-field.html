@@ -1,0 +1,13 @@
+
+{% if field.is_hidden %}
+    {{ field }}
+{% else %}
+    {% if field.field.widget.input_type == 'checkbox' %}
+        {% include '_components/fields/checkbox.html' %}
+    {% elif field.field.widget.input_type == 'radio' %}
+        {% include '_components/fields/radio.html' %}
+    {% else %}
+        {% include '_components/fields/field.html' %}
+    {% endif %}
+{% endif %}
+

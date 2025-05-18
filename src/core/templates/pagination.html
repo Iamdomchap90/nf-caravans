@@ -1,0 +1,62 @@
+
+{% load querystring_utils static %}
+
+{% if obj_list.paginator.num_pages > 1 %}
+    <section class="pagination">
+        <div class="wrapper">
+            <div class="pagination__items">
+                <div class="pagination__pages">
+                    {% if obj_list.has_previous %}
+                        <a href="{% querystring_replace querystring page=obj_list.previous_page_number %}" aria-label="Go to previous page" rel="prev"><img src="{% static 'img/arrow.svg' %}" alt="Prev" /></a>
+                    {% endif %}
+
+                    {% if obj_list.paginator.num_pages > page_breakpoint %}
+                        {% if obj_list.number == 1 %}
+                            <span class="active" aria-label="You are on page 1" aria-current="true">1</span>
+                        {% else %}
+                            <a href="{% querystring_replace querystring page=1 %}" aria-label="Go to page 1" aria-current="false">1</a>
+                        {% endif %}
+
+                        {% if show_start_dots %}
+                            <span class="dots">...</span>
+                        {% endif %}
+
+                        {% for page_number in visible_pages %}
+                            {% if page_number == obj_list.number %}
+                                <span class="active" aria-label="You are on page {{ page_number }}" aria-current="true">{{ page_number }}</span>
+                            {% else %}
+                                <a href="{% querystring_replace querystring page=page_number %}" title="Page {{ page_number }}" aria-label="Go to page {{ page_number }}" aria-current="false">{{ page_number }}</a>
+                            {% endif %}
+                        {% endfor %}
+
+                        {% if show_end_dots %}
+                            <span class="dots">...</span>
+                        {% endif %}
+
+                        {% with last=obj_list.paginator.num_pages %}
+                            {% if obj_list.number == last %}
+                                <span class="active" aria-label="You are on page {{ last }}" aria-current="true">{{ last }}</span>
+                            {% else %}
+                                <a href="{% querystring_replace querystring page=last %}" aria-label="Go to page {{ last }}" aria-current="false">{{ last }}</a>
+                            {% endif %}
+                        {% endwith %}
+                    {% else %}
+                        {% for page_number in obj_list.paginator.page_range %}
+                            {% if page_number == obj_list.number %}
+                                <span class="active" aria-label="You are on page {{ page_number }}" aria-current="true">{{ page_number }}</span>
+                            {% else %}
+                                <a href="{% querystring_replace querystring page=page_number %}" aria-label="Go to page {{ page_number }}" aria-current="false">{{ page_number }}</a>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+
+                    {% if obj_list.has_next %}
+                        <a href="{% querystring_replace querystring page=obj_list.next_page_number %}"  aria-label="Go to next page" rel="next"><img src="{% static 'img/arrow.svg' %}" alt="Next" /></a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endif %}
+
+

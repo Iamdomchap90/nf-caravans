@@ -1,0 +1,17 @@
+
+{% extends 'base.html' %}
+{% load cms_tags show_pagination %}
+
+{% block title %}{% if 'page' in request.build_absolute_uri and not 'page=1' in request.build_absolute_uri %}Page {{ page_obj.number }} of {% endif %}{% page_attribute 'page_title' %}{% endblock %}
+
+{% block body %}
+    {% placeholder "content" %}
+
+    {% include "_components/text_tag_filter_form.html" %}
+
+    {% block page_objects %}{% endblock %}
+
+    {% show_pagination page_obj %}
+{% endblock %}
+
+

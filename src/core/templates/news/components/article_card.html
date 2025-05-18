@@ -1,0 +1,12 @@
+{% load static thumbnail %}
+
+<div class="news-cards__card">
+    <img class="news-cards__card-image" src="{% thumbnail article.photo 'news:card' %}" alt="{{ article.photo.default_alt_text|default:'' }}" />
+    <div class="news-cards__card-text">
+        <p class="news-info"><span class="date">{{ article.publish_at|date:'j F Y' }}</span><span class="read-time">{{ article.read_time }} min read</span></p>
+        <h4><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></h4>
+        <p>{{ article.intro }}</p>
+        <a href="{{ article.get_absolute_url }}">Continue reading<img src="{% static 'img/blue-arrow-right.svg' %}" /></a>
+    </div>
+</div>
+

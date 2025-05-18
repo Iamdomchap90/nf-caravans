@@ -1,0 +1,45 @@
+
+{% load static cms_tags thumbnail %}
+
+<script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Organization",
+        "name": "{{ cookiecutter.client_name }}",
+        "url": "{{ request.scheme }}://{{ request.META.HTTP_HOST }}",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "123 Test Road",
+            "addressLocality": "Test Town",
+            "addressRegion": "Test Region",
+            "postalCode": "TE57 1NG"
+        },
+        "logo": "{{ request.scheme }}://{{ request.META.HTTP_HOST }}{% static 'img/logo.png' %}",
+        "sameAs": [
+            "https://www.facebook.com/{{ cookiecutter.client_name }}",
+            "https://x.com/{{ cookiecutter.client_name }}",
+            "https://www.linkedin.com/company/{{ cookiecutter.client_name }}/"
+        ]
+    }
+</script>
+
+<script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Website",
+        "url": "{{ request.scheme }}://{{ request.META.HTTP_HOST }}",
+        "name": "{{ cookiecutter.client_name }}",
+        "description": "{% page_attribute 'meta_description' %}"
+    }
+</script>
+
+<script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "ImageObject",
+        "url": "{{ request.scheme }}://{{ request.META.HTTP_HOST }}{% if request.current_page.socialshareimageextension.social_share_image %}{% thumbnail request.current_page.socialshareimageextension.social_share_image 'social_share_image' %}{% else %}{% static 'img/sharing-img.jpg' %}{% endif %}",
+        "width": "1500",
+        "height": "1000"
+    }
+</script>
+

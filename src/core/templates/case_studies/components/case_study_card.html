@@ -1,0 +1,14 @@
+
+{% load static thumbnail %}
+
+<div class="news-cards__card">
+    <img class="news-cards__card-image" src="{% thumbnail case_study.image 'case_study:card' %}" alt="{{ case_study.image.default_alt_text|default:'' }}" />
+    <div class="news-cards__card-text">
+        <p class="news-info"><span class="date">{{ case_study.publish_at|date:'j F Y' }}</span></p>
+        <h4><a href="{{ case_study.slug }}">{{ case_study.title }}</a></h4>
+        <p>{{ case_study.description }}</p>
+        <a href="{{ case_study.slug }}">Continue reading<img src="{% static 'img/blue-arrow-right.svg' %}" /></a>
+    </div>
+</div>
+
+

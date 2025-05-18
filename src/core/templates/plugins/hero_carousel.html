@@ -1,0 +1,20 @@
+{% load thumbnail %}
+
+<section class="hero">
+    <div class="hero__slides">
+        {% for image in instance.hero_images.all %}
+            <div class="hero__slide" style="background-image: url('{% thumbnail image.image 'plugins:hero' %}');">
+                <div class="hero__slide-container wrapper">
+                    <div class="hero__slides__text">
+                        {{ image.title }}
+                        <p>{{ image.strapline }}</p>
+                        {% if image.cta_text %}
+                            <a href="{{ image.get_absolute_url }}" title="{{ image.cta_text }}" class="btn"{% if image.new_tab %} target="_blank"{% endif %}{% if image.external_url %} rel="noopener noreferrer"{% endif %}>{{ image.cta_text }}</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+

@@ -1,0 +1,41 @@
+
+{% load thumbnail %}
+
+<div class="wrapper wrapper--very-thin">
+    <div class="form-designer">
+        <div class="form-designer__intro">
+            <div class="form-designer__intro__text">
+                <h3>{{ instance.form.title }}</h3>
+                {% if instance.pre_text %}
+                    <p>{{ instance.pre_text }}</p>
+                {% endif %}
+            </div>
+            {% if instance.image %}
+                <div class="form-designer__intro__image">
+                    <img src="{% thumbnail instance.image 'plugins:form_designer' %}" alt="{{ instance.image.default_alt_text|default:'' }}" />
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="form-designer__form">
+            <form method="post"  enctype="multipart/form-data" action="{% url 'forms:submission' %}">
+                {% csrf_token %}
+                <input type="hidden" name="_formcontent" value="{{ instance.form.id }}">
+
+                <fieldset>
+                    {% for field in form %}
+                        {% include '_components/form-field.html' %}
+                    {% endfor %}
+                </fieldset>
+
+                {% if instance.post_text %}
+                    <p>{{ instance.post_text }}</p>
+                {% endif %}
+
+                <button type="submit" class="btn">{{ instance.submit_text }}</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+

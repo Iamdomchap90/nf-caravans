@@ -1,0 +1,24 @@
+
+{% load cms_tags thumbnail %}
+
+<section class="gallery{% if instance.display == instance.Display.CAROUSEL %} gallery--carousel{% endif %}">
+    <div class="wrapper wrapper--very-thin">
+        <div class="gallery__slides">
+            <div class="gallery__slides__items{% if instance.display == instance.Display.THUMBNAILS %} gallery__images gallery__images--{{ instance.child_plugin_instances|length }}{% endif %}">
+                {% for plugin in instance.child_plugin_instances %}
+                    {% render_plugin plugin %}
+                {% endfor %}
+            </div>
+            {% if instance.child_plugin_instances|length > 1 or instance.display == instance.Display.CAROUSEL %}
+                <div class="gallery__slides__actions">
+                    <button class="gallery__slides__prev" title="Previous Image"></button>
+                    <button class="gallery__slides__next" title="Next Image"></button>
+                    <span class="gallery__slides__num"><span class="gallery__slides__num__counter">1</span>/{{ instance.child_plugin_instances|length }}</span>
+                    <a href="#" class="gallery__slides__open" title="View Larger"></a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+

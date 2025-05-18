@@ -1,0 +1,131 @@
+
+{% load static cms_tags menu_tags sekizai_tags google_tag_manager seo thumbnail %}
+<!doctype html>
+<html lang="{{ request.LANGUAGE_CODE }}">
+    <head>
+        <meta charset="utf-8">
+        <title>{% block title %}{% page_attribute 'page_title' %}{% endblock %} | {{ cookiecutter.client_name }}</title>
+        <meta name="description" content="{% block meta_description %}{% page_attribute 'meta_description' %}{% endblock %}">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="{{ request.build_absolute_uri }}" />
+        <meta property="og:title" content="{% block og_title %}{% page_attribute 'page_title' %}{% endblock %}" />
+        <meta property="og:description" content="{% block og_desc %}{% page_attribute 'meta_description' %}{% endblock %}" />
+        <meta property="og:image" content="{{ request.scheme }}://{{ request.META.HTTP_HOST }}{% block og_image %}{% thumbnail request.current_page.socialshareimageextension.social_share_image 'social_share_image' %}{% endblock %}" />
+        <meta property="og:image:secure_url" content="{{ request.scheme }}://{{ request.META.HTTP_HOST }}{% block og_image_secure %}{% thumbnail request.current_page.socialshareimageextension.social_share_image 'social_share_image' %}{% endblock %}" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:site" content="https://twitter.com/{{ cookiecutter.client_name }}" />
+        <meta name="twitter:title" content="{% block twitter_title %}{% page_attribute 'page_title' %}{% endblock %}" />
+        <meta name="twitter:description" content="{% block twitter_description %}{% page_attribute 'meta_description' %}{% endblock %}" />
+        <meta name="twitter:image" content="{{ request.scheme }}://{{ request.META.HTTP_HOST }}{% block twitter_image %}{% thumbnail request.current_page.socialshareimageextension.social_share_image 'social_share_image' %}{% endblock %}" />
+
+        {% block robots %}
+            {% is_noindex as noindex %}
+            {% if noindex %}
+                <meta name="robots" content="noindex">
+            {% endif %}
+        {% endblock %}
+
+        {% render_block extra_schema_data %}
+        {% block schema_data %}{% endblock schema_data %}
+
+        {% include '_components/schema.html' %}
+
+        <link rel="stylesheet" href="{% static 'dist/css/main.css' %}">
+        {% render_block "css" %}
+
+        <link rel="canonical" href="{% generate_canonical_url %}">
+
+        {% google_tag_manager javascript=True %}
+        {% render_block "js" %}
+    </head>
+
+    <body class="no-js">
+        {% google_tag_manager javascript=False %}
+
+        {% cms_toolbar %}
+
+        <nav class="skip-links absolute -left-full -top-full" aria-label="Skip links">
+            <ul>
+                <li><a href="#navigation">Skip to navigation</a></li>
+                <li><a href="#content">Skip to content</a></li>
+                <li><a href="#footer">Skip to footer</a></li>
+            </ul>
+        </nav>
+
+        {% block header %}
+            {% include '_header.html' %}
+        {% endblock %}
+
+        {% block breadcrumb %}
+            <nav class="breadcrumb">
+                <div class="wrapper">
+                    <ul>
+                        {% block crumbs %}{% show_breadcrumb 0 "_components/breadcrumb.html" 0 %}{% endblock crumbs %}
+                    </ul>
+                </div>
+            </nav>
+        {% endblock %}
+
+        <main role="main" id="content">
+            {% block body %}
+                {% placeholder 'content' %}
+            {% endblock body %}
+        </main>
+
+        {% block footer %}
+            {% include '_footer.html' %}
+        {% endblock %}
+
+        {% block js %}
+            <script src="{% static 'dist/js/main.js' %}"></script>
+        {% endblock js %}
+
+        {% if sentry_dsn %}
+            <script
+                src="https://browser.sentry-cdn.com/7.25.0/bundle.min.js"
+                integrity="sha384-sAWci+OD+xB6LxmUoPyE7zbMBw5MAcZtJLLex1A10obajVIyDBDG3ZOP1KE0nj5Q"
+                crossorigin="anonymous">
+            </script>
+
+            <script
+                src="https://browser.sentry-cdn.com/7.25.0/replay.min.js"
+                integrity="sha384-8ssJ67PPG2zhkQEvmYtGXdekdqYEBsCZ0nZJy8Cs5nDZfZ/cBtUze5lxk+oi2YCr"
+                crossorigin="anonymous">
+            </script>
+            {% if sentry_replay_session_sample_rate or sentry_replay_error_sample_rate %}
+                <script>
+                    Sentry.init({
+                        dsn: "{{ sentry_dsn }}",
+
+                        replaysSessionSampleRate: {{ sentry_replay_session_sample_rate }},
+                        replaysOnErrorSampleRate: {{ sentry_replay_error_sample_rate }},
+
+                        integrations: [
+                            new Sentry.Integrations.Replay({
+                                maskAllText: false,
+                                maskAllInputs: true,
+                                blockAllMedia: true
+                            })
+                        ],
+                    });
+                </script>
+            {% endif %}
+        {% endif %}
+
+        {% if request.toolbar and request.toolbar.edit_mode_active %}
+            <script>
+                {# Reload JS after CMS content is changed #}
+                CMS.$(window).on('cms-content-refresh', function () {
+                    document.querySelector('script[src="{% static 'dist/js/main.js' %}"]').remove();
+                    var script = document.createElement('script');
+                    script.src = '{% static 'dist/js/main.js' %}';
+                    document.body.appendChild(script);
+                });
+            </script>
+        {% endif %}
+    </body>
+</html>
+
+

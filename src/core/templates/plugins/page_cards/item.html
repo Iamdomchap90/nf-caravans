@@ -1,0 +1,20 @@
+
+{% load thumbnail %}
+
+<div class="page-cards__card">
+    <img class="page-cards__image" src="{% thumbnail instance.image 'plugins:page_card' %}" alt="{{ instance.image.default_alt_text|default:'' }}">
+    <div class="page-cards__content">
+        <div class="page-cards__card-text">
+            <h3>{{ instance.title }}</h3>
+            {% if instance.summary %}
+                <p>{{ instance.summary }}</p>
+            {% endif %}
+        </div>
+
+        {% if instance.get_absolute_url %}
+            <a href="{{ instance.get_absolute_url }}" class="btn hide-tablet"{% if instance.new_tab %} target="_blank"{% endif %}{% if instance.external_url %} rel="noopener noreferrer"{% endif %}>{{ instance.cta_text }}</a>
+        {% endif %}
+    </div>
+</div>
+
+

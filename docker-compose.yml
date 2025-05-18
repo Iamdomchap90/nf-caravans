@@ -1,0 +1,51 @@
+version: '3.7'
+services:
+
+  cache:
+    image: redis:latest
+
+  web:
+    &appbase
+    platform: linux/amd64
+    build:
+      context: .
+      target: "base"
+    command: src/manage.py runserver 0.0.0.0:8000
+    ports:
+      - "127.0.0.1:8000:8000"
+    volumes:
+      - .:/app
+    depends_on:
+      - mail
+      - cache
+    env_file:
+      - ${ENV_FILE:-.empty}
+    environment:
+      - DJANGO_SETTINGS_MODULE=core.settings
+      - SECRET_KEY=development-secret
+      - PRIMARY_HOST=localhost
+      - DEPLOY_ENV=local
+      - DEBUG=True
+      - DATABASE_URL=sqlite://app/local.sqlite
+      - REDIS_URL=redis://cache
+
+  test:
+    <<: *appbase
+    ports: []
+    command: pytest src/
+    environment:
+      - DJANGO_SETTINGS_MODULE=core.settings
+      - DATABASE_URL=sqlite://app/test.sqlite
+      - DEPLOY_ENV=test
+      - SECRET_KEY=test-secret
+
+  mail:
+    image: mailhog/mailhog
+    platform: linux/amd64
+    ports:
+      - "127.0.0.1:8025:8025"
+
+  queue:
+    <<: *appbase
+    command: src/manage.py qcluster
+    ports: [ ]

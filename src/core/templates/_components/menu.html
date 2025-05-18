@@ -1,0 +1,31 @@
+
+{% load cms_tags menu_tags %}
+
+{% for child in children %}
+    <div class="site-menu__item{% if child.children %} parent{% endif %}{% if child.selected %} selected{% endif %}{% if child.ancestor %} ancestor{% endif %}{% if child.sibling %} sibling{% endif %}{% if child.descendant %} descendant{% endif %}">
+        <a href="{{ child.attr.redirect_url|default:child.get_absolute_url }}">{{ child.get_menu_title }}</a>
+
+        {% if child.children %}
+            <div class="site-menu__dropdown">
+                <div class="site-menu__dropdown__inner">
+                    <div class="site-menu__background"></div>
+                    <div class="wrapper">
+                        <div class="site-menu__description site-menu__description--primary">
+                            <a class="more-btn" href="{{ child.attr.redirect_url|default:child.get_absolute_url }}" title="Visit this section">
+                                <h3>{{ child.get_menu_title }}</h3>
+                                {% if child.attr.menu_desc %}<p>{{ child.attr.menu_desc }}</p>{% endif %}
+                            </a>
+                        </div>
+                        <div class="site-menu__children">
+                            <ol>
+                                {% show_menu from_level to_level extra_inactive extra_active "_components/menu_child.html" "" "" child %}
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+{% endfor %}
+
+

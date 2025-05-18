@@ -1,0 +1,65 @@
+{% load cms_tags static sekizai_tags %}
+
+{% addtoblock extra_schema_data %}
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [{
+                {% for category in categories %}
+                    {% if category.published_faqs %}
+                        {% for faq in category.published_faqs %}
+                            "@type": "Question",
+                            "name": "{{ faq.question }}",
+                            "acceptedAnswer": {
+                                "@type": "Answer",
+                                "text": "{{ faq.answer|safe }}"
+                            }
+                        }{% if not forloop.last %}, {{% endif %}
+                        {% endfor %}
+                    {% endif %}
+                    {% if not forloop.last %}, {{% endif %}
+                {% endfor %}
+            ]
+        }
+    </script>
+{% endaddtoblock %}
+
+<section class="faqs">
+    <div class="wrapper wrapper--thin">
+        {% if instance.title %}
+            <h3 class="pb-2">{{ instance.title }}</h3>
+        {% endif %}
+
+        <ul class="faqs__questions">
+            {% for category in categories %}
+                {% if category.published_faqs %}
+                    <li>
+                        <button class="opener">
+                            <span>{{ category.name }}</span>
+                            <img src="{% static 'img/faq-yellow.svg' %}" alt="" aria-hidden="true" />
+                        </button>
+
+                        <div class="content">
+                            <ul class="faqs__child-questions">
+                                {% for faq in category.published_faqs %}
+                                    <li>
+                                        <button class="opener">
+                                            <span>{{ faq.question }}</span>
+                                            <img src="{% static 'img/faq.svg' %}" alt="" aria-hidden="true" />
+                                        </button>
+
+                                        <div class="content">
+                                            {{ faq.answer|safe }}
+                                        </div>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+</section>
+

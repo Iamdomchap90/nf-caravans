@@ -1,0 +1,18 @@
+<section class="cta-block">
+    <div class="cta-block__cta">
+        <div class="wrapper">
+            <div class="cta-block__cols">
+                <div class="cta-block__col">
+                    <h2>{{ instance.title }}</h2>
+                </div>
+                {% if instance.description %}
+                    <div class="cta-block__col">
+                        {{ instance.description|safe }}
+                        <a href="{{ instance.get_absolute_url }}" class="btn"{% if instance.new_tab %} target="_blank" rel="noopener noreferrer"{% endif %}>{{ instance.cta_text }}</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+

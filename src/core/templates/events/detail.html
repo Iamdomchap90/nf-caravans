@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load cms_tags static thumbnail thumbnail_position menu_tags %}
+
+{% block schema_data %}
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Event",
+            "name": "{% firstof event.meta_title event.title %}",
+            "startDate": "{{ event.date }}",
+            "eventStatus": "https://schema.org/EventScheduled",
+            "image": "{{ request.scheme }}://{{ request.META.HTTP_HOST }}{{ event.image.url }}",
+            "description": "{{ event.description }}",
+            "location": {
+                "@type": "Place",
+                "name": "{{ event.location }}"
+            }
+        }
+    </script>
+{% endblock schema_data %}
+
+{% block title %}{{ event.title }}{% endblock %}
+{% block meta_description %}{{ event.meta_description }}{% endblock %}
+
+{% block og_title %}{{ event.title }}{% endblock %}
+{% block og_desc %}{{ event.meta_description }}{% endblock %}
+{% block twitter_title %}{{ event.title }}{% endblock %}
+{% block twitter_description %}{{ event.meta_description }}{% endblock %}
+{% block og_image %}{% thumbnail event.image 'social_share_image' %}{% endblock %}
+{% block og_image_secure %}{% thumbnail event.image 'social_share_image' %}{% endblock %}
+{% block twitter_image %}{% thumbnail event.image 'social_share_image' %}{% endblock %}
+
+{% block crumbs %}
+    {% with app_template=True %}
+        {% show_breadcrumb 0 "_components/breadcrumb.html" 0 %}
+        <li>{{ event.title|truncatewords:5 }}</li>
+    {% endwith %}
+{% endblock crumbs %}
+
+{% block body %}
+    {% render_placeholder event.content %}
+{% endblock body %}
+

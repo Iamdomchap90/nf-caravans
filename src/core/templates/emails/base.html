@@ -1,0 +1,114 @@
+
+{% load static %}
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{{ cookiecutter.client_name }} - {% block email_title %}New email from {{ cookiecutter.client_name }}{% endblock %}</title>
+        <style type="text/css">
+            body,
+            table,
+            p,
+            a {
+                font-family: Arial, "Helvetica Neue", Helvetica, sans-serif !important;
+            }
+        </style>
+    </head>
+
+    <body style="width: 100%; margin:0; padding:0; font-family: Arial, Helvetica, sans-serif; line-height: 32px; font-size: 16px; color: #4a4a4a; background-color: #eeeeee;">
+        <!--[if mso]>
+            <center>
+            <table><tr><td width="700">
+        <![endif]-->
+        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width: 700px; margin: 0 auto;">
+            <tr>
+                <td>
+                    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #fff; padding: 0 12%;">
+                        <tr>
+                            <td style="line-height: 0; font-size: 0;" height="64"></td>
+                        </tr>
+                        <tr>
+                            <td align="left" style="line-height: 48px;">
+                                <img src="{{ cookiecutter.live_domain }}/img/logo.png" alt="{{ cookiecutter.client_name }} logo" style="display: block; width: auto; height: 48px;" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="line-height: 0; font-size: 0;" height="32"></td>
+                        </tr>
+
+                        {% block body %}
+                            <tr>
+                                <td align="left" style="line-height: 0;">
+                                    <p style="margin: 0; font-size: 34px; line-height: 34px;">Hi {{ recipient.first_name }}.</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="line-height: 0; font-size: 0;" height="32"></td>
+                            </tr>
+                            <tr>
+                                <td align="left" style="line-height: 0;">
+                                    <p style="margin: 0; font-size: 24px; line-height: 32px;">Email subject.</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="line-height: 0; font-size: 0;" height="32"></td>
+                            </tr>
+                            <tr>
+                                <td align="left" style="line-height: 0;">
+                                    <p style="margin: 0; font-size: 16px; line-height: 32px;">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede.</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="line-height: 0; font-size: 0;" height="32"></td>
+                            </tr>
+                            <tr>
+                                <td align="left" style="line-height: 0;">
+                                    <p style="margin: 0; font-size: 16px; line-height: 32px;">Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim pellentesque felis.</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="line-height: 0; font-size: 0;" height="32"></td>
+                            </tr>
+                            <tr>
+                                <!--[if mso]>
+                                    <center>
+                                    <table><tr><td width="182">
+                                <![endif]-->
+                                <td align="left" style="display: table; margin: 0; max-width: 182px; width: 100%; background-color: #4a4a4a; font-size: 16px; text-align: center; text-decoration: none; height: 48px; border-radius: 4px;">
+                                    <a href="#" title="Call to action" style="display: table-cell; color: #fff; text-decoration: none; text-transform: uppercase; font-weight: 700; cursor: pointer; vertical-align: middle; text-align: center; line-height: 16px; padding: 6px;">Call to action</a>
+                                </td>
+                                <!--[if mso]>
+                                    </td></tr></table>
+                                    </center>
+                                <![endif]-->
+                            </tr>
+                            <tr>
+                                <td style="line-height: 0; font-size: 0;" height="32"></td>
+                            </tr>
+                            <tr>
+                                <td style="line-height: 0;">
+                                    <p style="margin: 0; font-size: 12px; line-height: 24px;">Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim pellentesque felis.</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="line-height: 0; font-size: 0;" height="32"></td>
+                            </tr>
+                        {% endblock body %}
+
+                        <tr>
+                            <td style="line-height: 0; font-size: 0;" height="64"></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <!--[if mso]>
+            </td></tr></table>
+            </center>
+        <![endif]-->
+    </body>
+</html>
+
+
+

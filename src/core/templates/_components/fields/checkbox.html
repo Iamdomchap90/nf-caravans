@@ -1,0 +1,24 @@
+
+{% if field.widget_type == 'checkboxselectmultiple' %}
+    <div class="field field--checkboxinput field--wide{% if field.errors %} error{% endif %}">
+        {% if not hide_label %}<label for="{{ field.id_for_label }}"><span class="text">{{ field.label }}</span>{% if field.field.required %}<span class="required">*</span>{% endif %}</label>{% endif %}
+        {% if field.help_text %}
+            <p class="help-text">{{ field.help_text }}</p>
+        {% endif %}
+        <ul>
+            {% for option in field %}
+                <li><label for="{{ option.id_for_label }}">{{ option.tag }}<span>{{ option.choice_label }}</span></label></li>
+            {% endfor %}
+        </ul>
+        {{ field.errors }}
+    </div>
+{% else %}
+    <div class="field field--checkboxinput field--wide{% if field.errors %} error{% endif %}">
+        {% if not hide_label %}<label for="{{ field.id_for_label }}">{{ field }}<span class="text">{{ field.label }}</span>{% if field.field.required %}<span class="required">*</span>{% endif %}</label>{% endif %}
+        {% if field.help_text %}
+            <p class="help-text">{{ field.help_text }}</p>
+        {% endif %}
+        {{ field.errors }}
+    </div>
+{% endif %}
+

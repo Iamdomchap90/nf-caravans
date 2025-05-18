@@ -1,0 +1,23 @@
+
+{% load static thumbnail %}
+
+{% thumbnail instance.image 'plugins:pullquote' as quote_image %}
+
+<section class="quote quote--{{ instance.background_colour }}">
+    <div class="wrapper {% if instance.image %}wrapper--thin{% else %}wrapper--very-thin{% endif %}">
+        <div class="quote__inner{% if instance.image %} quote__inner--with-image{% endif %}">
+            <figure>
+                <blockquote>
+                    <span>{{ instance.quote|linebreaksbr }}</span>
+                </blockquote>
+                <figcaption>
+                    <p>{% if instance.citation_url %}<a href="{{ instance.citation_url }}">{% endif %}{{ instance.citation }}{% if instance.citation_url %}</a>{% endif %}</p>
+                </figcaption>
+            </figure>
+            {% if instance.image and instance.image_right %}
+                {% include '_components/polaroid.html' with image_url=quote_image.url tilt_right=True shadow=True %}
+            {% endif %}
+        </div>
+    </div>
+</section>
+

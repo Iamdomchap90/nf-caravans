@@ -1,0 +1,21 @@
+{% load cms_tags %}
+
+<div class="stats__blue">
+    <div class="stats__blue-heading">
+        <h3>{{ instance.title }}</h3>
+        {% if instance.introduction %}<p>{{ instance.introduction }}</p>{% endif %}
+    </div>
+    <section class="wrapper">
+        <div class="stats">
+            {% for stat in instance.plugin_statistics.all %}
+                <div class="stats__card">
+                    <div class="stats__card-text">
+                        <h4>{{ stat.stat_value }}</h4>
+                        <p>{{ stat.strapline }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+</div>
+

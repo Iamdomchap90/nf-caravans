@@ -1,0 +1,31 @@
+
+{% load static %}
+
+<section class="search-bar">
+    <div class="wrapper">
+        <form method="get" action="{{ request.url }}">
+            <div class="search-bar__queries">
+                {{ form.text }}
+                <div class="search-bar__multi-select">
+                    <button type="button" class="search-bar__multi-select__opener">
+                        <span>{{ form.tags.label }}</span>
+                        <img src="{% static 'img/icons/faq-blue.svg' %}" alt="" aria-hidden="true" />
+                    </button>
+                    <div class="search-bar__multi-select__dropdown">
+                        {{ form.tags }}
+                    </div>
+                </div>
+                {% if form.period %}
+                    <div>
+                        {{ form.period }}
+                    </div>
+                {% endif %}
+                <button type="submit" class="search-bar__submit" title="Search">
+                    <img src="{% static 'img/icons/search.svg' %}" alt="" aria-hidden="true">
+                    <span aria-hidden="true">Search</span></button>
+            </div>
+        </form>
+    </div>
+</section>
+
+

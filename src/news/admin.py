@@ -13,7 +13,6 @@ class CategoryAdmin(admin.ModelAdmin):
 class ArticleAdmin(admin.ModelAdmin):
     list_filter = ["tags"]
     autocomplete_fields = ["author"]
-    # filter_horizontal = ["tags"]
     fieldsets = [
         (
             "Structured Data",

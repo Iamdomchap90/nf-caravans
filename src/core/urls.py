@@ -23,7 +23,6 @@ urlpatterns = (
         path("google33b1735040ebbe58.html", views.google_verification),
         path("sitemap.xml", sitemap, {"sitemaps": sitemaps}, name="sitemap"),
         path("sitemap/", views.sitemap, name="html_sitemap"),
-        path("taggit_autosuggest/", include("taggit_autosuggest.urls")),
         path("accounts/", include("users.urls")),
         path("admin/", admin.site.urls),
         path("", include("cms.urls")),

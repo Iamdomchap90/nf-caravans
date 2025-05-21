@@ -159,6 +159,7 @@ if DEPLOY_ENV == "test":
 
 APPS = [
     "users",
+    "caravan_bookings",
     "core",
     "news",
     "people",
@@ -193,6 +194,8 @@ THIRD_PARTY_APPS = [
     "taggit",
     "import_export",
     "django_q",
+    "localflavor",
+    "phonenumber_field",
 ]
 
 DJANGO = [

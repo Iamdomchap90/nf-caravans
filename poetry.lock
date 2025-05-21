@@ -459,6 +459,40 @@ django = ">=4.2"
 tests = ["coverage"]
 
 [[package]]
+name = "django-localflavor"
+version = "5.0"
+description = "Country-specific Django helpers"
+optional = false
+python-versions = ">=3.9"
+files = [
+    {file = "django_localflavor-5.0-py3-none-any.whl", hash = "sha256:ee32749420cc4a93b18667939fe7fa0da36d71024a0d9578b40809a71489cee7"},
+    {file = "django_localflavor-5.0.tar.gz", hash = "sha256:9ddcce5dac6a956d076f3134071c64d4c76e1c7063e8aa7730414a2a1c5ded59"},
+]
+
+[package.dependencies]
+django = ">=4.2"
+python-stdnum = ">=1.6"
+
+[[package]]
+name = "django-phonenumber-field"
+version = "8.1.0"
+description = "An international phone number field for django models."
+optional = false
+python-versions = ">=3.9"
+files = [
+    {file = "django_phonenumber_field-8.1.0-py3-none-any.whl", hash = "sha256:9ba66873bf47401b13fc57797fbf85e785864a6bfdc8b9daa3a9012886567045"},
+    {file = "django_phonenumber_field-8.1.0.tar.gz", hash = "sha256:f19450625574ad3a2de047c409527d0e57699496849e71e53b53e8679ff67b27"},
+]
+
+[package.dependencies]
+Django = ">=4.2"
+phonenumberslite = {version = ">=7.0.2", optional = true, markers = "extra == \"phonenumberslite\""}
+
+[package.extras]
+phonenumbers = ["phonenumbers (>=7.0.2)"]
+phonenumberslite = ["phonenumberslite (>=7.0.2)"]
+
+[[package]]
 name = "django-picklefield"
 version = "3.3"
 description = "Pickled object field for Django"
@@ -1142,6 +1176,17 @@ files = [
 ptyprocess = ">=0.5"
 
 [[package]]
+name = "phonenumberslite"
+version = "9.0.5"
+description = "Python version of Google's common library for parsing, formatting, storing and validating international phone numbers."
+optional = false
+python-versions = "*"
+files = [
+    {file = "phonenumberslite-9.0.5-py2.py3-none-any.whl", hash = "sha256:2e9f94dcf47644ce47a34c4721a3da5c372ea26d2a2a841c40fe496b51e14c1e"},
+    {file = "phonenumberslite-9.0.5.tar.gz", hash = "sha256:51e9ff09fe218f7cbb7118d936bf329340b187f6cf3821098624e32a738257c1"},
+]
+
+[[package]]
 name = "pillow"
 version = "9.5.0"
 description = "Python Imaging Library (Fork)"
@@ -1422,6 +1467,20 @@ python-versions = "*"
 files = [
     {file = "python-environ-0.4.54.tar.gz", hash = "sha256:6249a14057f95aba3b4906d73276f770e01e659f8098b3f3b34295feac42865b"},
 ]
+
+[[package]]
+name = "python-stdnum"
+version = "2.1"
+description = "Python module to handle standardized numbers and codes"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "python_stdnum-2.1-py3-none-any.whl", hash = "sha256:25eabcf5f307dd4150fd8f1c03f4512a6caeb84c9f09be1448711f5803373c58"},
+    {file = "python_stdnum-2.1.tar.gz", hash = "sha256:6b01645969eb3dfd55061a0114d593753cd9e653cea9083198b7eea12644397a"},
+]
+
+[package.extras]
+soap = ["zeep"]
 
 [[package]]
 name = "redis"
@@ -1709,4 +1768,4 @@ openpyxl = "*"
 [metadata]
 lock-version = "2.0"
 python-versions = "~3.12"
-content-hash = "62c888623a196b732aa2c9d973d19c64cfdf9b134ae98de2f8346739d2924bb7"
+content-hash = "f389a2ac8a68a78312566a39bdc94f35c51f33c2121a96ec7eb3b3301c3b7b9c"

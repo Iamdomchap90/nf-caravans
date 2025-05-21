@@ -17,3 +17,4 @@ test-reports/
 local.db
 test.db
 *.sqlite
+.env.local

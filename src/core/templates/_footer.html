@@ -2,35 +2,6 @@
 {% load cms_tags %}
 
 <footer id="footer" class="site-footer">
-    <div class="site-footer__signup">
-        <div class="wrapper wrapper--l">
-            <h3>Sign up to receive regular updates</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget pretium tellus, et congue nulla. Sed non molestie mauris. </p>
-            <form action="{% url 'newsletter_submit' %}" method="post">
-                {% csrf_token %}
-                <div class="signup-form__inputs">
-                    <div class="signup-form__field">
-                        <label for="{{ newsletter_form.first_name.id_for_label }}">First name</label>
-                        {{ newsletter_form.first_name }}
-                    </div>
-                    <div class="signup-form__field">
-                        <label for="{{ newsletter_form.last_name.id_for_label }}">Last name</label>
-                        {{ newsletter_form.last_name }}
-                    </div>
-                    <div class="signup-form__field">
-                        <label for="{{ newsletter_form.email.id_for_label }}">Email address</label>
-                        {{ newsletter_form.email }}
-                    </div>
-                    <div class="signup-form__consent">
-                        <label class="checkbox" for="{{ newsletter_form.consent.id_for_label }}">{{ newsletter_form.consent }} {{ newsletter_form.consent.label }}</label>
-                    </div>
-                </div>
-                <div class="signup-form__field">
-                    <button type="submit" class="btn">Sign Up Now</button>
-                </div>
-            </form>
-        </div>
-    </div>
     <ul>
         {% for link in social_links %}
             <li><a href="{{ link.url }}" title="{{ cookiecutter.client_name }} on {{ link.name }}"><span class="icon"><img src="{{ link.icon.url }}" alt="" /></span></a></li>

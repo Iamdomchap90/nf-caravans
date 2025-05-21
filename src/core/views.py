@@ -2,7 +2,9 @@ from django.contrib.sites.models import Site
 from django.shortcuts import redirect, render
 from django.templatetags.static import static
 
-from cms.models import Page, TreeNode
+from cms.models import Page
+from treebeard.mp_tree import MP_Node
+
 
 
 def favicon(request):
@@ -40,7 +42,7 @@ def sitemap(request):
     )
 
     nodes = [page.node for page in pages.select_related("node")]
-    annotated_nodes = TreeNode.get_annotated_list_qs(nodes)
+    annotated_nodes = MP_Node.get_annotated_list_qs(nodes)
     annotated_pages = [(pages[x], annotated_nodes[x][1]) for x in range(0, len(nodes))]
 
     return render(request, "sitemap.html", {"pages": annotated_pages})

@@ -4,9 +4,6 @@ from cms.apphook_pool import apphook_pool
 
 @apphook_pool.register
 class NewsApp(CMSApp):
-    """
-    App hook for News app
-    """
 
     app_name = "news"
     name = "News"

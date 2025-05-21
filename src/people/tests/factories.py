@@ -1,17 +1,17 @@
-import factory
+# import factory
 
-from core.tests.factories import CategoryFactoryMixin
-from people.models import Category, Person
-
-
-class CategoryFactory(CategoryFactoryMixin):
-    class Meta:
-        model = Category
+# from core.tests.factories import CategoryFactoryMixin
+# from people.models import Category, Person
 
 
-class PersonFactory(factory.django.DjangoModelFactory):
-    name = factory.Faker("name")
-    category = factory.SubFactory(CategoryFactory)
+# class CategoryFactory(CategoryFactoryMixin):
+#     class Meta:
+#         model = Category
 
-    class Meta:
-        model = Person
+
+# class PersonFactory(factory.django.DjangoModelFactory):
+#     name = factory.Faker("name")
+#     category = factory.SubFactory(CategoryFactory)
+
+#     class Meta:
+#         model = Person

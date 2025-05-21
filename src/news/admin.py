@@ -1,17 +1,19 @@
 from django.contrib import admin
 
-from giant_news.admin import ArticleAdmin as BaseArticleAdmin, CategoryAdmin
-
 from core.mixins import admin as admin_mixins
 from news.models import Article, Category
 
-admin.site.register(Category, CategoryAdmin)
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ["name", "slug"]
+    search_fields = ["name"]
 
 
 @admin.register(Article)
-class ArticleAdmin(BaseArticleAdmin):
+class ArticleAdmin(admin.ModelAdmin):
+    list_filter = ["tags"]
     autocomplete_fields = ["author"]
-    filter_horizontal = ["tags"]
+    # filter_horizontal = ["tags"]
     fieldsets = [
         (
             "Structured Data",

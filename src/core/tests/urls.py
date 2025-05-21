@@ -11,11 +11,7 @@ sitemaps = {}
 
 urlpatterns = [
     path("sitemap.xml", sitemap, {"sitemaps": sitemaps}, name="sitemap"),
-    path("vacancies/", include("vacancies.urls")),
     path("news/", include("news.urls")),
-    path("newsletter/", submit_newsletter, name="newsletter_submit"),
-    path("events/", include("events.urls")),
-    path("forms/", include("forms.urls")),
     path("admin/", admin.site.urls),
     path("", include("cms.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

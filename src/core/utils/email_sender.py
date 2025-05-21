@@ -12,7 +12,7 @@ def extract_body_content(template_content, context):
 
     # endblock pattern could include the block name at the end so
     # " %}" is omitted
-    pattern = r"(.*?)\"
+    pattern = r"{% block body %}(.*?)\{% endblock %}"
     body_content = re.search(pattern, template_content, re.DOTALL).group(1).strip()
 
     return django_engine.from_string(body_content).render(context)

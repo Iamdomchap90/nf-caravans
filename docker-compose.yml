@@ -1,4 +1,5 @@
 version: '3.7'
+
 services:
 
   cache:
@@ -6,7 +7,7 @@ services:
 
   web:
     &appbase
-    platform: linux/amd64
+    # platform: linux/amd64
     build:
       context: .
       target: "base"
@@ -19,8 +20,9 @@ services:
       - mail
       - cache
     env_file:
-      - ${ENV_FILE:-.empty}
+      - .env.local
     environment:
+      - ALLOWED_HOSTS=0.0.0.0
       - DJANGO_SETTINGS_MODULE=core.settings
       - SECRET_KEY=development-secret
       - PRIMARY_HOST=localhost
@@ -41,11 +43,11 @@ services:
 
   mail:
     image: mailhog/mailhog
-    platform: linux/amd64
+    # platform: linux/amd64
     ports:
       - "127.0.0.1:8025:8025"
 
   queue:
     <<: *appbase
     command: src/manage.py qcluster
-    ports: [ ]
+    ports: []

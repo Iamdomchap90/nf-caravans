@@ -64,7 +64,7 @@ ALLOWED_HOSTS += [PRIMARY_HOST]
 
 DATABASES = {"default": dj_database_url.config(conn_max_age=600)}
 
-CSRF_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = False
 SECURE_CONTENT_TYPE_NOSNIFF = True
 SECURE_BROWSER_XSS_FILTER = True
 
@@ -160,36 +160,23 @@ if DEPLOY_ENV == "test":
 APPS = [
     "users",
     "core",
-    "case_studies",
-    "events",
     "news",
-    "newsletter",
     "people",
-    "vacancies",
-    "resources",
-    "giant_news",
-    "forms",
     "faqs",
     "social_links",
     "footer_links",
-    "giant_search",
 ]
 PLUGINS = [
-    "plugins.pullquote",
     "plugins.key_stat",
     "plugins.iframe_embed",
     "plugins.page_cards",
     "plugins.hero_carousel",
     "plugins.gallery",
     "plugins.video",
-    "plugins.featured_cta",
-    "plugins.form_container",
     "plugins.faq",
     "plugins.rich_text",
     "plugins.people_cards",
     "plugins.article_cards",
-    "plugins.case_study_cards",
-    "plugins.event_cards",
 ]
 
 THIRD_PARTY_APPS = [
@@ -200,13 +187,10 @@ THIRD_PARTY_APPS = [
     "sekizai",
     "easy_thumbnails",
     "filer",
-    "form_designer",
     "admin_ordering",
     "admin_extra_buttons",
     "djangocms_admin_style",
     "taggit",
-    "taggit_autosuggest",
-    "watson",
     "import_export",
     "django_q",
 ]
@@ -229,7 +213,6 @@ INSTALLED_APPS = APPS + PLUGINS + THIRD_PARTY_APPS + DJANGO
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "cms.middleware.utils.ApphookReloadMiddleware",
-    "watson.middleware.SearchContextMiddleware",
     "core.middleware.DenyIndexMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.middleware.cache.UpdateCacheMiddleware",
@@ -270,7 +253,6 @@ TEMPLATES = [
                 "core.context_processors.sentry_replay_error_sample_rate",
                 "footer_links.context_processors.footer_links",
                 "social_links.context_processors.social_links",
-                "newsletter.context_processors.newsletter_form",
             ],
             "loaders": ["django.template.loaders.app_directories.Loader"],
             "debug": DEBUG,
@@ -294,12 +276,10 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 AUTH_USER_MODEL = "users.User"
-REGISTER_NEWS_APP = False
 FILE_UPLOAD_PERMISSIONS = 0o755
 FILE_UPLOAD_DIRECTORY_PERMISSIONS = 0o755
-GIANT_NEWS_ARTICLE_MODEL = "news.Article"
 CMS_COLOR_SCHEME_TOGGLE = True
-FORM_DESIGNER_FIELD_TYPES = "forms.form_config.CUSTOM_FIELD_TYPES"
+CMS_CONFIRM_VERSION4 = True
 
 # Rich Text settings
 WYSIWYG_WIDGET = RedactorWidget
@@ -353,7 +333,6 @@ THUMBNAIL_QUALITY = 80
 THUMBNAIL_ALIASES = {
     "": {
         "social_share_image": {"size": (1500, 1000), "crop": False},
-        "case_study:card": {"size": (150, 150), "crop": False},
         "event:card": {"size": (150, 150), "crop": False},
         "plugins:pullquote": {"size": (150, 150), "crop": False},
         "news:card": {"size": (150, 150), "crop": False},

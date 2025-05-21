@@ -1,9 +1,7 @@
 from django.db import models
 from django.urls import reverse
 
-from giant_news.models import AbstractArticle
-from giant_search.mixins import SearchableMixin
-from taggit_autosuggest.managers import TaggableManager
+from taggit.managers import TaggableManager
 
 from core.mixins.models import TimestampMixin
 
@@ -20,7 +18,7 @@ class Category(TimestampMixin):
         return self.name
 
 
-class Article(SearchableMixin, AbstractArticle):
+class Article(models.Model):
     author = models.ForeignKey(
         to="people.Person",
         null=True,
@@ -29,13 +27,6 @@ class Article(SearchableMixin, AbstractArticle):
     )
     tags = TaggableManager(related_name="articles")
     category = models.ForeignKey(to=Category, on_delete=models.CASCADE, related_name="articles")
-
-    @classmethod
-    def get_search_queryset(cls):
-        return cls.objects.published()
-
-    def get_search_result_description(self):
-        return self.meta_description
 
     def get_absolute_url(self):
         return reverse("news:detail", kwargs={"slug": self.slug})

@@ -161,6 +161,7 @@ APPS = [
     "users",
     "caravan_bookings",
     "core",
+    "contacts",
     "news",
     "people",
     "faqs",
@@ -196,6 +197,7 @@ THIRD_PARTY_APPS = [
     "django_q",
     "localflavor",
     "phonenumber_field",
+    "ckeditor",
 ]
 
 DJANGO = [

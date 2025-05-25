@@ -31,6 +31,7 @@ easy-thumbnails = "^2.10"
 django-filer = "^3.3.1"
 django-localflavor = "^5.0"
 django-phonenumber-field = {extras = ["phonenumberslite"], version = "^8.1.0"}
+django-ckeditor = "^6.7.2"
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.1"

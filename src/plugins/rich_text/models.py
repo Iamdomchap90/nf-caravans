@@ -3,20 +3,16 @@ from django.utils.text import Truncator
 
 from cms.models import CMSPlugin
 
-from core.fields import RichTextField
+from ckeditor.fields import RichTextField 
 
 
 class RichText(CMSPlugin):
     """
     Represents rich text block using wysiwyg editor
     """
-
-    content = RichTextField()
+    content = RichTextField(blank=True)
 
     def __str__(self):
-        """
-        String representation of the object
-        """
         return self.excerpt
 
     @property

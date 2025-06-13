@@ -1,9 +1,8 @@
 from django.utils.html import strip_tags
 from django.utils.text import Truncator
 
+from ckeditor.fields import RichTextField
 from cms.models import CMSPlugin
-
-from core.fields import RichTextField
 
 
 class RichText(CMSPlugin):
@@ -11,12 +10,9 @@ class RichText(CMSPlugin):
     Represents rich text block using wysiwyg editor
     """
 
-    content = RichTextField()
+    content = RichTextField(blank=True)
 
     def __str__(self):
-        """
-        String representation of the object
-        """
         return self.excerpt
 
     @property

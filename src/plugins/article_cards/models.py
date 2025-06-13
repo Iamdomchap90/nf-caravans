@@ -2,10 +2,9 @@ from django.db import models
 from django.db.models import Q
 
 from cms.models import CMSPlugin
-from news.models import Category
 from taggit.models import Tag
 
-from news.models import Article
+from news.models import Article, Category
 
 
 class ArticleCardsPlugin(CMSPlugin):

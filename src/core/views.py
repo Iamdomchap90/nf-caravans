@@ -6,7 +6,6 @@ from cms.models import Page
 from treebeard.mp_tree import MP_Node
 
 
-
 def favicon(request):
     """
     Redirects to our favicon.ico

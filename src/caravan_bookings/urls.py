@@ -1,6 +1,6 @@
 from django.urls import path
-from .views import BookingEnquiryCreateView, BookingEnquirySuccessView
 
+from .views import BookingEnquiryCreateView, BookingEnquirySuccessView
 
 app_name = "caravan_bookings"
 

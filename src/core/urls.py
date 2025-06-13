@@ -6,6 +6,7 @@ from django.contrib.sitemaps.views import sitemap
 from django.urls import path
 
 from cms.sitemaps import CMSSitemap
+
 from news.sitemaps import ArticleSitemap
 
 from . import views

@@ -1,4 +1,8 @@
 __pycache__/
+node_modules/
+staticfiles/
+vscode/
+**/pytest.ini
 *.py[cod]
 *.pyo
 *.swp
@@ -6,7 +10,6 @@ __pycache__/
 .venv
 .sass-cache
 .idea
-node_modules/
 .terraform
 .env
 .coverage
@@ -18,3 +21,4 @@ local.db
 test.db
 *.sqlite
 .env.local
+*.lock

@@ -1,7 +1,8 @@
 from cms.plugin_base import CMSPluginBase
 from cms.plugin_pool import plugin_pool
 
-from plugins.rich_text import models
+from .forms import RichTextForm
+from .models import RichText
 
 __all__ = ["RichTextPlugin"]
 
@@ -13,5 +14,12 @@ class RichTextPlugin(CMSPluginBase):
     """
 
     name = "Rich Text"
-    model = models.RichText
+    model = RichText
+    form = RichTextForm
     render_template = "plugins/rich_text.html"
+
+    class Media:
+        js = (
+            "https://cdn.ckeditor.com/ckeditor5/40.0.1/classic/ckeditor.js",
+            "frontend/js/init-ckeditor.js",
+        )

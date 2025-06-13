@@ -1,18 +1,24 @@
 
 {% load menu_tags %}
 
-{% for child in children %}
-    <div class="mobile-menu__item{% if child.children %} parent{% endif %}{% if child.selected %} selected{% endif %}{% if child.ancestor %} ancestor{% endif %}{% if child.sibling %} sibling{% endif %}{% if child.descendant %} descendant{% endif %}">
-        <a href="{% if child.children %}#{% else %}{{ child.attr.redirect_url|default:child.get_absolute_url }}{% endif %}">{{ child.get_menu_title }}</a>
+<div id="mobile-menu" class="pt-[113px] px-[12px] menu w-full full-minus-nav hidden">
+    {% for child in children %}
+        <div class="mobile-menu__item {% if child.children %} parent{% endif %}{% if child.selected %} selected{% endif %}{% if child.ancestor %} ancestor{% endif %}{% if child.sibling %} sibling{% endif %}{% if child.descendant %} descendant{% endif %} py-[16px] px-[12px]">
+            <a class="flex justify-between items-center" href="{% if child.children %}#{% else %}{{ child.attr.redirect_url|default:child.get_absolute_url }}{% endif %}" class="h-[44px]">
+                <p class="min-w-[170px] w-[50vw] inline">{{ child.get_menu_title }}</p>
+                <span class="menu-arrow h-[20px] w-20px text-primary inline">></span>
+            </a>
 
-        {% if child.children %}
-            <ol>
-                <li><a href="#" class="back">Back</a></li>
-                <li><a href="{{ child.attr.redirect_url|default:child.get_absolute_url }}" class="repeat">{{ child.get_menu_title }}</a></li>
-                {% show_menu from_level to_level extra_inactive extra_active "_components/mobile_menu_child.html" "" "" child %}
-            </ol>
-        {% endif %}
-    </div>
-{% endfor %}
+            {% if child.children %}
+                <ol>
+                    <li><a href="#" class="back">Back</a></li>
+                    <li><a href="{{ child.attr.redirect_url|default:child.get_absolute_url }}" class="repeat">{{ child.get_menu_title }}</a></li>
+                    {% show_menu from_level to_level extra_inactive extra_active "_components/mobile_menu_child.html" "" "" child %}
+                </ol>
+            {% endif %}
+        </div>
+        <hr class="border-t border-gray-200">
+    {% endfor %}
+</div>
 
 

@@ -1,12 +1,12 @@
 FROM python:3.12-slim as base
 
 ENV PYTHONUNBUFFERED=1 \
-    PIP_NO_CACHE_DIR=off
+    PIP_NO_CACHE_DIR=off \
+    PATH="/root/.local/bin:$PATH"
 
 WORKDIR /app
 
-ENV PATH="/root/.local/bin:$PATH"
-
+# Install system dependencies & Poetry
 RUN set -ex \
     && apt-get update \
     && apt-get -y --no-install-recommends install \
@@ -20,11 +20,7 @@ RUN set -ex \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
+# Install Python dependencies
 COPY pyproject.toml /app/
+RUN poetry install $(test "$BUILD_ENV" = production && echo "--no-dev") --no-root --no-interaction --no-ansi
 
-RUN set -ex \
-    && poetry install $(test "$BUILD_ENV" = production && echo "--no-dev") --no-root --no-interaction --no-ansi
-
-FROM base as full
-
-COPY . /app/

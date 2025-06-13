@@ -3,6 +3,7 @@ from django.contrib import admin
 from core.mixins import admin as admin_mixins
 from news.models import Article, Category
 
+
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ["name", "slug"]

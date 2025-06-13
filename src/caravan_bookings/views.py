@@ -1,8 +1,9 @@
 from django.urls import reverse_lazy
-from django.views.generic.edit import CreateView
 from django.views.generic import TemplateView
-from .models import BookingEnquiry
+from django.views.generic.edit import CreateView
+
 from .forms import BookingEnquiryForm
+from .models import BookingEnquiry
 
 
 class BookingEnquiryCreateView(CreateView):
@@ -14,6 +15,3 @@ class BookingEnquiryCreateView(CreateView):
 
 class BookingEnquirySuccessView(TemplateView):
     template_name = "caravan_bookings/success.html"
-
-
-

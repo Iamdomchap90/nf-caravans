@@ -1,5 +1,7 @@
 from django import forms
+
 from localflavor.gb.forms import GBPostcodeField
+
 from .models import BookingEnquiry
 
 
@@ -19,5 +21,3 @@ class BookingEnquiryForm(forms.ModelForm):
             "postcode",
             "contact_number",
         ]
-    
-    

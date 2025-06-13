@@ -31,12 +31,15 @@ easy-thumbnails = "^2.10"
 django-filer = "^3.3.1"
 django-localflavor = "^5.0"
 django-phonenumber-field = {extras = ["phonenumberslite"], version = "^8.1.0"}
+django-ckeditor = "^6.7.2"
+django-vite = "^3.1.0"
+pytailwindcss = "^0.2.0"
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.1"
 coverage = "^7.2"
 flake8 = "^6.0"
-pytest = "^7.2"
+pytest = "^8.0"
 pytest-cov = "^4.0"
 pytest-django = "^4.5"
 pytest-mock = "^3.10"

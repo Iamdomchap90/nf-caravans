@@ -1,8 +1,8 @@
 from cms.plugin_base import CMSPluginBase
 from cms.plugin_pool import plugin_pool
 
-from .models import RichText
 from .forms import RichTextForm
+from .models import RichText
 
 __all__ = ["RichTextPlugin"]
 

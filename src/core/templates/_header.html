@@ -1,7 +1,42 @@
-
-{% load menu_tags cms_tags %}
+{% load static menu_tags cms_tags %}
 
 <header class="site-header">
-    <nav id="navigation"><ul>{% show_menu %}</ul></nav>
+    <nav id="navigation" class="flex w-screen h-[57px] bg-primary">
+        <div id="logo-container" class="w-[50vw] md:w-[33vw]" >
+            <a class="h-inherit w-inherit" href="/" >
+                <img src="{% static 'frontend/images/nf-text-only-logo.PNG' %}"
+                alt="Logo"
+                class="h-full w-auto max-h-[57px]"
+                >
+            </a>
+        </div>
+        <div class="px-3 h-inherit w-[66vw] flex justify-end tablet:justify-around items-center ">
+            <ul id="tablet-navlist-container" class="font-nav text-white hidden tablet:flex ml-auto tablet:justify-evenly tablet:space-x-6">{% show_menu %}</ul>
+            
+            <div id="burger-icon" class="p-4 space-y-1 rounded tablet:hidden cursor-pointer transition-all">
+                <span class="block top w-6 h-0.75 duration-700 bg-white"></span>
+                <span class="block middle w-6 h-0.75 duration-700 bg-white"></span>
+                <span class="block bottom w-6 h-0.75 duration-700 bg-white"></span>
+            </div>
+        </div>
+    </nav>
+
+    {% include "_components/mobile_menu.html" %}
+      
 </header>
+
+{% block js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const burger = document.getElementById('burger-icon');
+      const menu = document.getElementById('mobile-menu');
+  
+      burger.addEventListener('click', function () {
+        menu.classList.toggle('hidden');
+        burger.classList.toggle('open');
+
+      });
+    });
+  </script>
+{% endblock %}
 

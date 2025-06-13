@@ -1,0 +1,15 @@
+#burger-icon.open .top {
+    transform: translateY(7.5px) rotate(45deg);
+  }
+
+#burger-icon.open .middle {
+    opacity: 0;
+}
+
+#burger-icon.open .bottom {
+    transform: translateY(-7.5px) rotate(-45deg);
+}
+
+.full-minus-nav{
+    height: calc(100vh - 57px);
+}

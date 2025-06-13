@@ -1,5 +1,7 @@
 from django.db import models
+
 from phonenumber_field.modelfields import PhoneNumberField
+
 from core.mixins.models import TimestampMixin
 
 
@@ -19,8 +21,12 @@ class BookingEnquiry(TimestampMixin):
     title = models.CharField(max_length=20, choices=Title.choices)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
-    primary_vehicle_reg = models.CharField(max_length=8, help_text="This would typically be the storage vehicle")
-    secondary_vehicle_reg = models.CharField(max_length=8, help_text="This would typically be the towing vehicle")
+    primary_vehicle_reg = models.CharField(
+        max_length=8, help_text="This would typically be the storage vehicle"
+    )
+    secondary_vehicle_reg = models.CharField(
+        max_length=8, help_text="This would typically be the towing vehicle"
+    )
     address_line_one = models.CharField(max_length=255)
     address_line_two = models.CharField(max_length=255, blank=True)
     postcode = models.CharField(max_length=8)
@@ -32,4 +38,3 @@ class BookingEnquiry(TimestampMixin):
 
     def __str__(self):
         return f"{self.title} {self.first_name} {self.last_name}"
-

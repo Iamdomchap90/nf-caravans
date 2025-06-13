@@ -27,6 +27,12 @@ lint: ## Check code wellformedness (local)
 	black --check src
 	isort --profile black src/
 
+css-build:
+	tailwindcss -i src/core/static/frontend/css/tailwind.css -o src/core/static/frontend/css/preflight.css --minify
+
+css-watch:
+	tailwindcss -i src/core/static/frontend/css/tailwind.css -o src/core/static/frontend/css/preflight.css --watch
+
 .PHONY: cleanup
 cleanup: ## Sanitise code (local)
 	black src

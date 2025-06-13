@@ -13,7 +13,7 @@ from sentry_sdk.integrations.django import DjangoIntegration
 
 from core.widgets import RedactorWidget
 
-PROJECT_ROOT = Path(__file__).resolve().parents[3]
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
 
 # Set hints to cast the environment variables, and set defaults where necessary.
 env = environ.Env(
@@ -118,8 +118,15 @@ STORAGES = {
 STATIC_URL = "/static/"
 MEDIA_URL = "/media/"
 
-STATIC_ROOT = "/storage/static"
+STATIC_ROOT = PROJECT_ROOT / "staticfiles"
 MEDIA_ROOT = "/storage/media"
+
+STATICFILES_DIRS = [PROJECT_ROOT / "src" / "core" / "static" / "frontend" / "dist"]
+
+DJANGO_VITE_DEV_MODE = DEBUG
+VITE_APP_DIR = PROJECT_ROOT / "src" / "core" / "static" / "frontend"
+VITE_STATIC_URL_PREFIX = "static/frontend"
+
 
 DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 
@@ -198,6 +205,7 @@ THIRD_PARTY_APPS = [
     "localflavor",
     "phonenumber_field",
     "ckeditor",
+    "django_vite",
 ]
 
 DJANGO = [

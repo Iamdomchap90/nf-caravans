@@ -1,4 +1,5 @@
 from django.db import models
+
 from core.mixins.models import TimestampMixin
 
 
@@ -10,4 +11,4 @@ class Contact(TimestampMixin):
 
     def __str__(self):
         formatted_date = self.created_at.strftime("%d-%m-%Y %H:%M")
-        return f"{self.first_name} ({formatted_date})"  
+        return f"{self.first_name} ({formatted_date})"

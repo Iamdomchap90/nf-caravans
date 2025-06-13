@@ -87,20 +87,16 @@ Currently the password reset is purely for admin accounts. Therefore templates/r
 
 ### Requirements
 
-- NPM ([Windows/OSX/Linux](https://nodejs.org/en/download/))
-- Yarn ([Windows/OSX/Linux](https://classic.yarnpkg.com/lang/en/docs/install/))
-- Docker ([Windows](https://docs.docker.com/docker-for-windows/install/), [OSX](https://docs.docker.com/docker-for-mac/install/), [Linux](https://docs.docker.com/install/linux/docker-ce/centos/))
-- Make ([Windows](https://stackoverflow.com/questions/32127524/how-to-install-and-use-make-in-windows), [OSX](https://formulae.brew.sh/formula/make), [Linux](https://askubuntu.com/a/1363822))
-- [Docker Compose](https://docs.docker.com/compose/install/)
+- Uses pytailwindcss to keep simple setup without use of node/ npm.
 
 ### Building the Frontend Locally
 
 navigate into the `./frontend` directory and run
 ```bash
-make build
-make watch
+make css-build
+make css-watch
 ```
-Which will compile from SASS and ES6 (in `build/src/`) to CSS and JS. This build directory is also symlinked from `build/dist/` to `src/core/static/dist/`.
+Which will compile tailwind v4 built in sass like notation.
 
 ## Tests
 ---

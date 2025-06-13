@@ -4,7 +4,6 @@ from cms.apphook_pool import apphook_pool
 
 @apphook_pool.register
 class CaravanBookingApp(CMSApp):
-
     app_name = "caravan_bookings"
     name = "Bookings"
 

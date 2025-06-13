@@ -1,8 +1,9 @@
 from django.urls import reverse_lazy
-from django.views.generic.edit import CreateView
 from django.views.generic import TemplateView
-from .models import Contact
+from django.views.generic.edit import CreateView
+
 from .forms import ContactEnquiryForm
+from .models import Contact
 
 
 class ContactEnquiryView(CreateView):
@@ -14,6 +15,3 @@ class ContactEnquiryView(CreateView):
 
 class ContactEnquirySuccessView(TemplateView):
     template_name = "contacts/success.html"
-
-
-

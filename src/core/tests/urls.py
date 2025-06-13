@@ -5,8 +5,6 @@ from django.contrib import admin
 from django.contrib.sitemaps.views import sitemap
 from django.urls import path
 
-from newsletter.views import submit_newsletter
-
 sitemaps = {}
 
 urlpatterns = [

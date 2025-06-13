@@ -1,9 +1,9 @@
 from django import forms
+
 from .models import Contact
 
 
 class ContactEnquiryForm(forms.ModelForm):
-
     class Meta:
         model = Contact
         fields = [
@@ -12,5 +12,3 @@ class ContactEnquiryForm(forms.ModelForm):
             "email",
             "enquiry",
         ]
-    
-    

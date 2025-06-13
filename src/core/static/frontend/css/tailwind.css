@@ -1,0 +1,12 @@
+@import "tailwindcss";
+
+@import "./base.css";
+@import "./navbar.css";
+
+@theme {
+    --color-primary: #fd8504;
+    --color-secondary: #000000;
+    --spacing-3: 15px;
+    --height-full-minus-nav: calc(100vh - 57px);
+    --breakpoint-tablet: 1000px;
+}
